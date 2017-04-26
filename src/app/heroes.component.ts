@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Hero } from './hero';
@@ -12,7 +12,12 @@ import { HeroService } from './hero.service';
 export class HeroesComponent implements OnInit {
   @Input()
   title: string;
+  @Input()
   heroes: Hero[];
+
+  @Output()
+  reload = new EventEmitter();
+
   selectedHero: Hero;
   addingHero = false;
   error: any;
@@ -23,10 +28,7 @@ export class HeroesComponent implements OnInit {
     private heroService: HeroService) { }
 
   getHeroes(): void {
-    this.heroService
-      .getHeroes()
-      .then(heroes => this.heroes = heroes)
-      .catch(error => this.error = error);
+    this.reload.emit();
   }
 
   addHero(): void {
@@ -44,14 +46,13 @@ export class HeroesComponent implements OnInit {
     this.heroService
       .delete(hero)
       .then(res => {
-        this.heroes = this.heroes.filter(h => h !== hero);
+        this.getHeroes();
         if (this.selectedHero === hero) { this.selectedHero = null; }
       })
       .catch(error => this.error = error);
   }
 
   ngOnInit(): void {
-    this.getHeroes();
   }
 
   onSelect(hero: Hero): void {

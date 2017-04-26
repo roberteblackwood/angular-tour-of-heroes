@@ -1,8 +1,8 @@
 <div>
   <div class="column-2">
-      <my-heroes title="My Heroes"></my-heroes>
+      <my-heroes title="My Heroes" [heroes]="heroes" (reload)="getHeroes()"></my-heroes>
   </div>
   <div class="column-2">
-      <my-heroes title="My Heroes 2: The Sequel"></my-heroes>
+      <my-heroes title="My Heroes 2: The Sequel" [heroes]="heroes" (reload)="getHeroes()"></my-heroes>
   </div>
 </div>

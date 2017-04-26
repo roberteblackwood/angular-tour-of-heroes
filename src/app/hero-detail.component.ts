@@ -11,7 +11,7 @@ import { HeroService } from './hero.service';
 })
 export class HeroDetailComponent implements OnInit {
   @Input() hero: Hero;
-  @Output() close = new EventEmitter();
+  @Output() close = new EventEmitter<Hero>();
   error: any;
   navigated = false; // true if navigated here
 

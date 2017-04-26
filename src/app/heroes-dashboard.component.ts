@@ -28,4 +28,5 @@ export class HeroesDashboardComponent implements OnInit {
   ngOnInit(): void {
     this.getHeroes();
   }
+  
 }
