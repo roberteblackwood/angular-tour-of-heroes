@@ -5,11 +5,11 @@ import { Hero } from './hero';
 import { HeroService } from './hero.service';
 
 @Component({
-  selector: 'my-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  selector: 'my-home-dashboard',
+  templateUrl: './home-dashboard.component.html',
+  styleUrls: ['./home-dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class HomeDashboardComponent implements OnInit {
   heroes: Hero[] = [];
 
   constructor(

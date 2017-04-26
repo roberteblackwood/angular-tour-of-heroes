@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Hero } from './hero';
@@ -10,6 +10,8 @@ import { HeroService } from './hero.service';
   styleUrls: ['./heroes.component.css']
 })
 export class HeroesComponent implements OnInit {
+  @Input()
+  title: string;
   heroes: Hero[];
   selectedHero: Hero;
   addingHero = false;

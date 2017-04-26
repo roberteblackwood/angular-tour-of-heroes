@@ -16,6 +16,7 @@ export class HeroService {
       .get(this.heroesUrl)
       .toPromise()
       .then((response) => {
+        console.log('Called HTTP service to get heroes!');
         return response.json().data as Hero[];
       })
       .catch(this.handleError);
