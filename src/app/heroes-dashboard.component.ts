@@ -10,7 +10,8 @@ import { HeroService } from './hero.service';
   styleUrls: ['./heroes-dashboard.component.css']
 })
 export class HeroesDashboardComponent implements OnInit {
-  heroes: Hero[];
+  heroes1: Hero[];
+  heroes2: Hero[];
   error: any;
   showNgFor = false;
 
@@ -18,15 +19,29 @@ export class HeroesDashboardComponent implements OnInit {
     private router: Router,
     private heroService: HeroService) { }
 
-  getHeroes(): void {
+  getHeroes(callback: (heroes: Hero[]) => void): void {
     this.heroService
       .getHeroes()
-      .then(heroes => this.heroes = heroes)
+      .then(callback)
       .catch(error => this.error = error);
   }
 
   ngOnInit(): void {
-    this.getHeroes();
+    this.getHeroes((heroes: Hero[]) => {
+      this.heroes1 = heroes;
+      this.heroes2 = heroes;
+    });
   }
   
+  loadHeroes1(){
+    this.getHeroes((heroes: Hero[]) => {
+      this.heroes1 = heroes;
+    });
+  }
+
+  loadHeroes2(){
+    this.getHeroes((heroes: Hero[]) => {
+      this.heroes2 = heroes;
+    });
+  }
 }
