@@ -17,6 +17,8 @@ export class HeroesComponent implements OnInit {
 
   @Output()
   reload = new EventEmitter();
+  @Output()
+  deleteHero = new EventEmitter<Hero>();
 
   selectedHero: Hero;
   addingHero = false;
@@ -41,15 +43,10 @@ export class HeroesComponent implements OnInit {
     if (savedHero) { this.getHeroes(); }
   }
 
-  deleteHero(hero: Hero, event: any): void {
+  deleteThisHero(hero: Hero, event: any): void {
     event.stopPropagation();
-    this.heroService
-      .delete(hero)
-      .then(res => {
-        this.getHeroes();
-        if (this.selectedHero === hero) { this.selectedHero = null; }
-      })
-      .catch(error => this.error = error);
+    this.deleteHero.emit(hero);
+    if (this.selectedHero === hero) { this.selectedHero = null; }
   }
 
   ngOnInit(): void {

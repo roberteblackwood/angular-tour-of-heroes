@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Response } from '@angular/http';
+
+import * as _ from "lodash";
 
 import { Hero } from './hero';
 import { HeroService } from './hero.service';
@@ -29,7 +32,7 @@ export class HeroesDashboardComponent implements OnInit {
   ngOnInit(): void {
     this.getHeroes((heroes: Hero[]) => {
       this.heroes1 = heroes;
-      this.heroes2 = heroes;
+      this.heroes2 = _.cloneDeep(this.heroes1);;
     });
   }
   
@@ -43,5 +46,24 @@ export class HeroesDashboardComponent implements OnInit {
     this.getHeroes((heroes: Hero[]) => {
       this.heroes2 = heroes;
     });
+  }
+
+  deleteHero(hero: Hero, heroes: Hero[]){
+    this.heroService
+      .delete(hero)
+      .then(response => {
+        let idx = heroes.findIndex(h => h.id === hero.id);
+        if(idx > -1){
+          heroes.splice(idx, 1);
+        }})
+      .catch(error => this.error = error);
+  }
+
+  deleteHero1(hero: Hero){
+    this.deleteHero(hero, this.heroes1);
+  }
+
+  deleteHero2(hero: Hero){
+    this.deleteHero(hero, this.heroes2);
   }
 }

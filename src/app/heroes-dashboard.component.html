@@ -1,8 +1,16 @@
 <div>
   <div class="column-2">
-      <my-heroes title="My Heroes" [heroes]="heroes1" (reload)="loadHeroes1()"></my-heroes>
+      <my-heroes title="My Heroes" 
+                 [heroes]="heroes1"
+                 (reload)="loadHeroes1()"
+                 (deleteHero)="deleteHero1($event)">
+      </my-heroes>
   </div>
   <div class="column-2">
-      <my-heroes title="My Heroes 2: The Sequel" [heroes]="heroes2" (reload)="loadHeroes2()"></my-heroes>
+      <my-heroes title="My Heroes 2: The Sequel" 
+                 [heroes]="heroes2" 
+                 (reload)="loadHeroes2()" 
+                 (deleteHero)="deleteHero2($event)">
+      </my-heroes>
   </div>
 </div>
