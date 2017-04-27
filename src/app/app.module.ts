@@ -8,7 +8,7 @@ import { InMemoryDataService } from './in-memory-data.service';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { HeroService } from './hero.service';
+import { HeroHttpService } from './hero.service';
 import { HomeDashboardComponent } from './home-dashboard.component';
 import { HeroesDashboardComponent } from './heroes-dashboard.component';
 import { HeroesComponent } from './heroes.component';
@@ -31,7 +31,7 @@ import { HeroSearchComponent } from './hero-search.component';
     HeroDetailComponent,
     HeroesDashboardComponent,
   ],
-  providers: [HeroService],
+  providers: [HeroHttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Hero } from './hero';
-import { HeroService } from './hero.service';
+import { HeroHttpService } from './hero.service';
 
 @Component({
   selector: 'my-heroes-dashboard',
@@ -16,13 +16,14 @@ export class HeroesDashboardComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private heroService: HeroService) { }
+    private heroService: HeroHttpService) { }
 
   getHeroes(): void {
     this.heroService
       .getHeroes()
-      .then(heroes => this.heroes = heroes)
-      .catch(error => this.error = error);
+      .subscribe(
+        heroes => this.heroes = heroes,
+        error => this.error = error);
   }
 
   ngOnInit(): void {

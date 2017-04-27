@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Hero } from './hero';
-import { HeroService } from './hero.service';
+import { HeroHttpService } from './hero.service';
 
 @Component({
   selector: 'my-home-dashboard',
@@ -14,12 +14,12 @@ export class HomeDashboardComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private heroService: HeroService) {
+    private heroService: HeroHttpService) {
   }
 
   ngOnInit(): void {
     this.heroService.getHeroes()
-      .then(heroes => this.heroes = heroes.slice(1, 5));
+      .subscribe(heroes => this.heroes = heroes.slice(1, 5));
   }
 
   gotoDetail(hero: Hero): void {
