@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Hero } from './hero';
-import { HeroHttpService } from './hero.http.service';
+import { HeroDataService } from './hero.data.service';
 
 @Component({
   selector: 'my-heroes',
@@ -20,11 +20,11 @@ export class HeroesComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private heroService: HeroHttpService) { }
+    private heroService: HeroDataService) { }
 
   getHeroes(): void {
     this.heroService
-      .getHeroes()
+      .heroes
       .subscribe(
         heroes => this.heroes = heroes,
         error => this.error = error);
@@ -37,19 +37,12 @@ export class HeroesComponent implements OnInit {
 
   close(savedHero: Hero): void {
     this.addingHero = false;
-    if (savedHero) { this.getHeroes(); }
+    if (savedHero) { }
   }
 
   deleteHero(hero: Hero, event: any): void {
     event.stopPropagation();
-    this.heroService
-      .delete(hero)
-      .subscribe(
-        res => {
-          this.heroes = this.heroes.filter(h => h !== hero);
-          if (this.selectedHero === hero) { this.selectedHero = null; }
-        },
-        error => this.error = error);
+    this.heroService.delete(hero).subscribe();
   }
 
   ngOnInit(): void {

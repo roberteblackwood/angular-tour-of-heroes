@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
 import { Hero } from './hero';
-import { HeroHttpService } from './hero.http.service';
+import { HeroDataService } from './hero.data.service';
 
 @Component({
   selector: 'my-hero-detail',
@@ -16,7 +16,7 @@ export class HeroDetailComponent implements OnInit {
   navigated = false; // true if navigated here
 
   constructor(
-    private heroService: HeroHttpService,
+    private heroService: HeroDataService,
     private route: ActivatedRoute) {
   }
 
@@ -25,8 +25,7 @@ export class HeroDetailComponent implements OnInit {
       if (params['id'] !== undefined) {
         const id = +params['id'];
         this.navigated = true;
-        this.heroService.getHero(id)
-            .subscribe(hero => this.hero = hero);
+        this.heroService.getHero(id).subscribe(hero => this.hero = hero);
       } else {
         this.navigated = false;
         this.hero = new Hero();
