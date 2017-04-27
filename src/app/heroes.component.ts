@@ -36,6 +36,10 @@ export class HeroesComponent implements OnInit {
     this.selectedHero = null;
   }
 
+  reloadHeroes():void{
+    this.heroService.reload();
+  }
+
   close(savedHero: Hero): void {
     this.addingHero = false;
     if (savedHero) { }
