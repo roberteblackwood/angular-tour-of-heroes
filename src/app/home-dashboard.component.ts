@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Hero } from './hero';
-import { HeroHttpService } from './hero.service';
+import { HeroHttpService } from './hero.http.service';
 
 @Component({
   selector: 'my-home-dashboard',
