@@ -3,14 +3,16 @@
       <my-heroes title="My Heroes" 
                  [heroes]="heroes1"
                  (reload)="loadHeroes1()"
-                 (deleteHero)="deleteHero1($event)">
+                 (save)="saveHero1($event)"
+                 (delete)="deleteHero1($event)">
       </my-heroes>
   </div>
   <div class="column-2">
       <my-heroes title="My Heroes 2: The Sequel" 
                  [heroes]="heroes2" 
-                 (reload)="loadHeroes2()" 
-                 (deleteHero)="deleteHero2($event)">
+                 (reload)="loadHeroes2()"
+                 (save)="saveHero2($event)"
+                 (delete)="deleteHero2($event)">
       </my-heroes>
   </div>
 </div>

@@ -11,9 +11,8 @@ import { HeroService } from './hero.service';
 })
 export class HeroDetailComponent implements OnInit {
   @Input() hero: Hero;
-  @Output() close = new EventEmitter<Hero>();
-  error: any;
-  navigated = false; // true if navigated here
+  @Output() close = new EventEmitter();
+  @Output() save = new EventEmitter<Hero>();
 
   constructor(
     private heroService: HeroService,
@@ -21,31 +20,13 @@ export class HeroDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params.forEach((params: Params) => {
-      if (params['id'] !== undefined) {
-        const id = +params['id'];
-        this.navigated = true;
-        this.heroService.getHero(id)
-            .then(hero => this.hero = hero);
-      } else {
-        this.navigated = false;
-        this.hero = new Hero();
-      }
-    });
   }
 
-  save(): void {
-    this.heroService
-        .save(this.hero)
-        .then(hero => {
-          this.hero = hero; // saved hero, w/ id if new
-          this.goBack(hero);
-        })
-        .catch(error => this.error = error); // TODO: Display error message
+  saveHero(): void {
+    this.save.emit(this.hero)
   }
 
-  goBack(savedHero: Hero = null): void {
-    this.close.emit(savedHero);
-    if (this.navigated) { window.history.back(); }
+  goBack(): void {
+    this.close.emit();
   }
 }

@@ -18,7 +18,9 @@ export class HeroesComponent implements OnInit {
   @Output()
   reload = new EventEmitter();
   @Output()
-  deleteHero = new EventEmitter<Hero>();
+  delete = new EventEmitter<Hero>();
+  @Output()
+  save = new EventEmitter<Hero>();
 
   selectedHero: Hero;
   addingHero = false;
@@ -29,23 +31,27 @@ export class HeroesComponent implements OnInit {
     private router: Router,
     private heroService: HeroService) { }
 
-  getHeroes(): void {
-    this.reload.emit();
+  addHero(): void {
+    this.selectedHero = new Hero();
   }
 
-  addHero(): void {
-    this.addingHero = true;
+  saveHero(hero: Hero):void{
+    this.save.emit(hero);
     this.selectedHero = null;
+  }
+
+  reloadHeroes():void{
+    this.reload.emit();
   }
 
   close(savedHero: Hero): void {
     this.addingHero = false;
-    if (savedHero) { this.getHeroes(); }
+    if (savedHero) { }
   }
 
-  deleteThisHero(hero: Hero, event: any): void {
+  deleteHero(hero: Hero, event: any): void {
     event.stopPropagation();
-    this.deleteHero.emit(hero);
+    this.delete.emit(hero);
     if (this.selectedHero === hero) { this.selectedHero = null; }
   }
 
@@ -54,10 +60,5 @@ export class HeroesComponent implements OnInit {
 
   onSelect(hero: Hero): void {
     this.selectedHero = hero;
-    this.addingHero = false;
-  }
-
-  gotoDetail(): void {
-    this.router.navigate(['/detail', this.selectedHero.id]);
   }
 }

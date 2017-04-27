@@ -36,6 +36,29 @@ export class HeroesDashboardComponent implements OnInit {
     });
   }
   
+  saveHero(hero: Hero, heroes: Hero[]){
+    this.heroService
+        .save(hero)
+        .then(savedHero => {
+          let idx = heroes.findIndex(h => h.id === savedHero.id);
+          if(idx > -1) {
+            heroes[idx] = savedHero;
+          }
+          else {
+            heroes.push(savedHero);
+          }
+        })
+        .catch(error => this.error = error); // TODO: Display error message
+  }
+
+  saveHero1(hero: Hero){
+    this.saveHero(hero, this.heroes1);
+  }
+
+  saveHero2(hero: Hero){
+    this.saveHero(hero, this.heroes2);
+  }
+
   loadHeroes1(){
     this.getHeroes((heroes: Hero[]) => {
       this.heroes1 = heroes;
@@ -52,10 +75,11 @@ export class HeroesDashboardComponent implements OnInit {
     this.heroService
       .delete(hero)
       .then(response => {
-        let idx = heroes.findIndex(h => h.id === hero.id);
-        if(idx > -1){
-          heroes.splice(idx, 1);
-        }})
+          let idx = heroes.findIndex(h => h.id === hero.id);
+          if(idx > -1){
+            heroes.splice(idx, 1);
+          }
+        })
       .catch(error => this.error = error);
   }
 
