@@ -7,7 +7,8 @@ import { HeroDataService } from './hero.data.service';
 @Component({
   selector: 'my-heroes',
   templateUrl: './heroes.component.html',
-  styleUrls: ['./heroes.component.css']
+  styleUrls: ['./heroes.component.css'],
+  providers: [HeroDataService]
 })
 export class HeroesComponent implements OnInit {
   @Input()
